@@ -4,9 +4,9 @@ require 'json'
 require 'net/https'
 require 'uri'
 require 'mongoid'
-require 'statsmix'
+#require 'statsmix'
 
-StatsMix.api_key = "3daa8355e72d23262d64"
+#StatsMix.api_key = "3daa8355e72d23262d64"
 
 set :static, true
 set :public_folder, 'public'
@@ -32,7 +32,7 @@ class Users
 end 
 
 get '/' do
-	StatsMix.track("Landing page visits", 1)
+	#StatsMix.track("Landing page visits", 1)
 	link = "http://foursquare.com/oauth2/authenticate?client_id=TIIWASIOG5LKB11BSVAMHTYBDVLUQDHTTJJHY4WTFBLU3EUQ&response_type=code&redirect_uri=http://foursqori.herokuapp.com/callback"
 	button = "https://playfoursquare.s3.amazonaws.com/press/logo/connect-white.png"
 	shot = "http://foursqori.herokuapp.com/shot.png"
@@ -40,7 +40,7 @@ get '/' do
 end
 
 get '/callback' do
-	StatsMix.track("Callbacks", 1)
+	#StatsMix.track("Callbacks", 1)
 	cli_id = "TIIWASIOG5LKB11BSVAMHTYBDVLUQDHTTJJHY4WTFBLU3EUQ"
 	cli_sec = "3EW5M1APICBDW1HMHH4LUYH25KTDP4ZWOM3R4TPE1NFFIBRU"
 	redir_uri = "http://foursqori.herokuapp.com/callback"
@@ -84,12 +84,12 @@ get '/callback' do
 end
 
 get '/privacy' do
-	StatsMix.track("Privacy page visits", 1)
+	#StatsMix.track("Privacy page visits", 1)
 	"Private means private :)"
 end
 
 post '/push' do
-	StatsMix.track("Pushes", 1)
+	#StatsMix.track("Pushes", 1)
 	# Get user ID
 	q = JSON.parse(params['user'])['id']
 	if q
@@ -154,11 +154,11 @@ post '/push' do
 end
 
 get '/success' do
-	StatsMix.track("Installs", 1)
+	#StatsMix.track("Installs", 1)
 	"Congrats, you just linked your account to the amazing FoursQori app!"
 end
 
 get '/error' do
-	StatsMix.track("Errors", 1)
+	#StatsMix.track("Errors", 1)
 	"Sorry, there was an error with your request"
 end
